@@ -17,25 +17,32 @@ namespace Ostium.BeforeIDie.API.Controllers
         [HttpGet]
         public async Task<ActionResult<SonhadoresDto>> Get()
         {
-            return new SonhadoresDto();
+            return Ok(new SonhadoresDto());
         }
 
         [HttpGet("{id:guid}")]
-        public async Task<ActionResult<SonhadorDto>> Get(Guid Id)
+        public async Task<ActionResult<SonhadorDto>> Get(Guid id)
         {
-            return new SonhadorDto();
+            return Ok(new SonhadorDto());
         }
         [HttpPost("entrar")]
         public async Task<ActionResult> Entrar(LoginDto dto)
         {
 
-            return Ok();
+            return Ok(dto);
         }
         [HttpPost("nova-conta")]
         public async Task<ActionResult> Registrar(RegisterUserDto registerUser)
         {
           
             return Ok(registerUser);
+        }
+
+        [HttpDelete("{id:guid}")]
+        public async Task<ActionResult> Delete(Guid id)
+        {
+
+            return Ok(id);
         }
 
     }
