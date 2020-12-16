@@ -1,9 +1,14 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using Ostium.BeforeIDie.API.Configurations;
+using Ostium.BeforeIDie.API.Model.Contracts.Settings;
+using Ostium.BeforeIDie.API.Settings;
 
 namespace Ostium.BeforeIDie.API
 {
@@ -19,12 +24,22 @@ namespace Ostium.BeforeIDie.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<DatabaseSettings>(
+                        Configuration.GetSection(nameof(DatabaseSettings))
+                );
+
+            services.AddSingleton<IDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Ostium.BeforeIDie.API", Version = "v1" });
             });
+
+            services.AddAutoMapper(typeof(Startup));
+
+            services.AddInjection();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

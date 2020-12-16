@@ -5,7 +5,10 @@ using System;
 namespace Ostium.BeforeIDie.API.Model.Entities
 {
     public class SonhoEntity:BaseEntity{
-
+        public override string ToString()
+        {
+            return "SonhoEntity";
+        }
         public string Sonho { get; set; }
 
         public string  DescricaoSonho { get; set; }

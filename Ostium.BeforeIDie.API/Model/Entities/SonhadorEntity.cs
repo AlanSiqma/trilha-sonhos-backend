@@ -7,6 +7,10 @@ namespace Ostium.BeforeIDie.API.Model.Entities
 {
     public class SonhadorEntity:BaseEntity{
 
+        public override string ToString()
+        {
+            return "SonhadorEntity";
+        }
         public string Nome { get; set; }
 
         public string Email { get; set; }   

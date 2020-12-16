@@ -12,5 +12,11 @@ namespace Ostium.BeforeIDie.API.Model.Dto
             this.Sonhadores = new List<SonhadorDto>();
         }
         public IEnumerable<SonhadorDto> Sonhadores{ get; set; }
+
+        internal SonhadoresDto AddSonhadores(List<SonhadorDto> map)
+        {
+            this.Sonhadores = map;
+            return this;
+        }
     }
 }

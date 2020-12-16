@@ -1,11 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Ostium.BeforeIDie.API.Model.Dto
+﻿namespace Ostium.BeforeIDie.API.Model.Dto
 {
     public class SonhoDto
     {
+        public string Id { get; set; }
+
+        public string Sonho { get; set; }
+
+        public string DescricaoSonho { get; set; }
+
+        public string Status { get; set; }
+
+        public string Visibilidade { get; set; }
+
+        public string Sonhador { get; set; }
     }
 }

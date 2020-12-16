@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 
 namespace Ostium.BeforeIDie.API.Controllers
 {
-    [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class SonhoController : ControllerBase
     {
@@ -20,8 +19,8 @@ namespace Ostium.BeforeIDie.API.Controllers
             return Ok(new SonhosDto());
         }
 
-        [HttpGet("{id:guid}")]
-        public async Task<ActionResult<SonhosDto>> Get(Guid Id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<SonhosDto>> Get(string Id)
         {
 
             return Ok(new SonhosDto());
@@ -37,8 +36,8 @@ namespace Ostium.BeforeIDie.API.Controllers
 
             return Ok(dto);
         }
-        [HttpDelete("{id:guid}")]
-        public async Task<ActionResult> Delete(Guid id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(string id)
         {
 
             return Ok(id);

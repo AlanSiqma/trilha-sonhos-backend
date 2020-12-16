@@ -1,27 +1,38 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
+using Ostium.BeforeIDie.API.Model.Contracts.Respositories;
 using Ostium.BeforeIDie.API.Model.Dto;
+using Ostium.BeforeIDie.API.Model.Entities;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Ostium.BeforeIDie.API.Controllers
 {
-    [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class SonhadorController : ControllerBase
     {
-        public SonhadorController()
-        {
+        private readonly ISonhadorRepository _sonhadorRepository;
+        private readonly IMapper _mapper;
 
+        public SonhadorController(ISonhadorRepository sonhadorRepository, IMapper mapper)
+        {
+            this._sonhadorRepository = sonhadorRepository;
+            this._mapper = mapper;
         }
         [HttpGet]
         public async Task<ActionResult<SonhadoresDto>> Get()
         {
-            return Ok(new SonhadoresDto());
+            var entities = await this._sonhadorRepository.Get();
+            var map = this._mapper.Map<List<SonhadorDto>>(entities);
+           
+            return Ok(new SonhadoresDto().AddSonhadores(map));
         }
 
-        [HttpGet("{id:guid}")]
-        public async Task<ActionResult<SonhadorDto>> Get(Guid id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<SonhadorDto>> Get(string id)
         {
             return Ok(new SonhadorDto());
         }
@@ -38,8 +49,8 @@ namespace Ostium.BeforeIDie.API.Controllers
             return Ok(registerUser);
         }
 
-        [HttpDelete("{id:guid}")]
-        public async Task<ActionResult> Delete(Guid id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(string id)
         {
 
             return Ok(id);
