@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver;
 using Ostium.BeforeIDie.API.Model.Contracts.Respositories;
 using Ostium.BeforeIDie.API.Model.Dto;
 using Ostium.BeforeIDie.API.Model.Entities;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -26,6 +24,7 @@ namespace Ostium.BeforeIDie.API.Controllers
         public async Task<ActionResult<SonhadoresDto>> Get()
         {
             var entities = await this._sonhadorRepository.Get();
+           
             var map = this._mapper.Map<List<SonhadorDto>>(entities);
            
             return Ok(new SonhadoresDto().AddSonhadores(map));
@@ -34,25 +33,45 @@ namespace Ostium.BeforeIDie.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<SonhadorDto>> Get(string id)
         {
-            return Ok(new SonhadorDto());
+            var entity = await this._sonhadorRepository.Get(id);
+
+            var map = this._mapper.Map<SonhadorDto>(entity);
+
+            return Ok(map);
         }
+        
         [HttpPost("entrar")]
         public async Task<ActionResult> Entrar(LoginDto dto)
         {
+            //TODO: implementar autenticacao
+            return Ok(dto);
+        }
+
+        [HttpPost("nova-conta")]
+        public async Task<ActionResult> Registrar(SonhadorDto dto)
+        {
+            var map = this._mapper.Map<SonhadorEntity>(dto);
+
+            await this._sonhadorRepository.Create(map);
 
             return Ok(dto);
         }
-        [HttpPost("nova-conta")]
-        public async Task<ActionResult> Registrar(RegisterUserDto registerUser)
+
+        [HttpPut("alterar-conta")]
+        public async Task<ActionResult> Alterar(SonhadorDto dto)
         {
-          
-            return Ok(registerUser);
+            var map = this._mapper.Map<SonhadorEntity>(dto);
+
+            await this._sonhadorRepository.Update(map.Id,map);
+
+            return Ok(dto);
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(string id)
         {
-
+            await this._sonhadorRepository.Remove(id);
+         
             return Ok(id);
         }
 
