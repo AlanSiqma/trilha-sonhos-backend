@@ -8,9 +8,9 @@
 
         public string DescricaoSonho { get; set; }
 
-        public string Status { get; set; }
+        public string IdStatus { get; set; }
 
-        public string Visibilidade { get; set; }
+        public string IdVisibilidade { get; set; }
 
         public string Sonhador { get; set; }
     }

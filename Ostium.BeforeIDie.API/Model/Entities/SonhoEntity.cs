@@ -13,11 +13,11 @@ namespace Ostium.BeforeIDie.API.Model.Entities
 
         public string  DescricaoSonho { get; set; }
 
-        public Guid IdStatus { get; set; }
+        public string IdStatus { get; set; }
 
-        public Guid IdVisibilidade { get; set; }
+        public string IdVisibilidade { get; set; }
         
-        public Guid IdSonhador { get; set; }
+        public string IdSonhador { get; set; }
 
         /*EF*/
 
