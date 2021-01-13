@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Ostium.BeforeIDie.API.Model.Contracts.Respositories;
 using Ostium.BeforeIDie.API.Model.Dto;
@@ -40,18 +41,44 @@ namespace Ostium.BeforeIDie.API.Controllers
 
             return Ok(map);
         }
+       
         [HttpGet("sonhos-sonhador/{id}")]
-        public async Task<ActionResult<List<SonhoDto>>> SonhoSonhador(string Id)
+        public async Task<ActionResult<List<SonhoDto>>> SonhoSonhador(string id)
         {
             var entities = await this._sonhoRepository.Get();
 
-            entities = entities.Where(x => x.IdSonhador.Equals(Id)).ToList();
+            entities = entities.Where(x => x.IdSonhador.Equals(id)).ToList();
 
             var map = this._mapper.Map<List<SonhoDto>>(entities);
 
             return Ok(map);
         }
 
+        [HttpGet("sonhos-visibilidade/{id}")]
+        public async Task<ActionResult<List<SonhoDto>>> SonhoVisibilidade( string Id )
+        {
+            var entities = await this._sonhoRepository.Get();
+
+            entities = entities.Where(x => x.IdVisibilidade.Equals(Id)).ToList();
+
+            var map = this._mapper.Map<List<SonhoDto>>(entities);
+
+            return Ok(map);
+        }
+
+        [HttpGet("sonhos-status/{id}")]
+        public async Task<ActionResult<List<SonhoDto>>> SonhoStatus( string Id )
+        {
+            var entities = await this._sonhoRepository.Get();
+
+            entities = entities.Where(x => x.IdStatus.Equals(Id)).ToList();
+
+            var map = this._mapper.Map<List<SonhoDto>>(entities);
+
+            return Ok(map);
+        }
+
+        
         [HttpPost("novo-sonho")]
         public async Task<ActionResult> Post(SonhoDto dto) {
         
@@ -61,6 +88,7 @@ namespace Ostium.BeforeIDie.API.Controllers
 
             return Ok(dto);
         }
+        
         [HttpPut("alterar-sonho")]
         public async Task<ActionResult> Put(SonhoDto dto)
         {
@@ -70,12 +98,13 @@ namespace Ostium.BeforeIDie.API.Controllers
 
             return Ok(dto);
         }
+        
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(string id)
         {
             await this._sonhoRepository.Remove(id);
 
-            return Ok(id);
+            return Ok( new {msg = "removido"});
         }
     }
 }

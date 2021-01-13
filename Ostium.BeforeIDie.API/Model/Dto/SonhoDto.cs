@@ -12,6 +12,7 @@
 
         public string IdVisibilidade { get; set; }
 
-        public string Sonhador { get; set; }
+        public string IdSonhador { get; set; }
+
     }
 }

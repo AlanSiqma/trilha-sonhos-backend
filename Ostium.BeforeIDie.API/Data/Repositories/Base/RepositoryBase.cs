@@ -5,6 +5,7 @@ using Ostium.BeforeIDie.API.Model.Entities.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Ostium.BeforeIDie.API.Data.Repositories.Base
@@ -26,6 +27,12 @@ namespace Ostium.BeforeIDie.API.Data.Repositories.Base
         {
             var list = await this._collections.FindAsync(x => true);
             return list.ToList();
+        }
+
+        public async Task<TEntity> Get( Expression<Func<TEntity, bool>> predicate )
+        {
+            var entity = await this._collections.FindAsync<TEntity>(predicate);
+            return entity.FirstOrDefault();
         }
 
         public async Task<TEntity> Get(string id)

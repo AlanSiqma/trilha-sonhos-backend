@@ -34,8 +34,9 @@ namespace Ostium.BeforeIDie.API.Controllers
         public async Task<ActionResult<SonhadorDto>> Get(string id)
         {
             var entity = await this._sonhadorRepository.Get(id);
-
             var map = this._mapper.Map<SonhadorDto>(entity);
+            
+            if ( map != null ) map.Senha = string.Empty;
 
             return Ok(map);
         }
@@ -44,7 +45,13 @@ namespace Ostium.BeforeIDie.API.Controllers
         public async Task<ActionResult> Entrar(LoginDto dto)
         {
             //TODO: implementar autenticacao
-            return Ok(dto);
+            SonhadorEntity usuario = await this._sonhadorRepository.Get( x =>
+                                                              x.Email == dto.Email &&
+                                                              x.Senha == dto.Password );
+
+            if(usuario != null) usuario.Senha = string.Empty;
+
+            return Ok(usuario);
         }
 
         [HttpPost("nova-conta")]

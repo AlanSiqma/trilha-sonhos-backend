@@ -1,5 +1,7 @@
 ﻿using Ostium.BeforeIDie.API.Model.Entities.Base;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Ostium.BeforeIDie.API.Model.Contracts.Repositories.Base
@@ -8,6 +10,7 @@ namespace Ostium.BeforeIDie.API.Model.Contracts.Repositories.Base
     {
         Task<List<TEntity>> Get();
         Task<TEntity> Get(string id);
+        Task<TEntity> Get( Expression<Func<TEntity, bool>> predicate );
         Task<TEntity> Create(TEntity entity);
         Task Update(string id, TEntity entity);
         Task Remove(TEntity entity);
