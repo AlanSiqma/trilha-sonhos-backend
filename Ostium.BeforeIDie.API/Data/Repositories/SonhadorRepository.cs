@@ -12,6 +12,5 @@ namespace Ostium.BeforeIDie.API.Data.Repositories
 
         }
   
-
     }
 }

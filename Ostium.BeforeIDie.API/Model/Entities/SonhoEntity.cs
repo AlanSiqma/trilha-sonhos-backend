@@ -1,6 +1,5 @@
 
 using Ostium.BeforeIDie.API.Model.Entities.Base;
-using System;
 
 namespace Ostium.BeforeIDie.API.Model.Entities
 {
@@ -13,17 +12,11 @@ namespace Ostium.BeforeIDie.API.Model.Entities
 
         public string  DescricaoSonho { get; set; }
 
-        public string IdStatus { get; set; }
+        public string Status { get; set; }
 
-        public string IdVisibilidade { get; set; }
+        public string Visibilidade { get; set; }
         
         public string IdSonhador { get; set; }
-
-        /*EF*/
-
-        public StatusSonhoEntity Status { get; set; } 
-
-        public VisibilidadeSonhoEntity Visibilidade  {get;set;}
 
         public SonhadorEntity Sonhador {get;set;}
 

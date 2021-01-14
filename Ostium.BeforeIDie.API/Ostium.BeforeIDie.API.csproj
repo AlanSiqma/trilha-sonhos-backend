@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>Ostium.BeforeIDie.API</RootNamespace>
+    <UserSecretsId>9f5f5a6f-e53f-4e9b-b891-3d7a5d71c498</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

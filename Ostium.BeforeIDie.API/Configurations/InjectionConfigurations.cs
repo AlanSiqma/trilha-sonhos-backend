@@ -10,8 +10,6 @@ namespace Ostium.BeforeIDie.API.Configurations
         {
             services.AddScoped<ISonhadorRepository, SonhadorRepository>();
             services.AddScoped<ISonhoRepository, SonhoRepository>();
-            services.AddScoped<IStatusSonhoRepository, StatusSonhoRepository>();
-            services.AddScoped<IVisibilidadeSonhoRepository, VisibilidadeSonhoRepository>();
 
             return services;
         }

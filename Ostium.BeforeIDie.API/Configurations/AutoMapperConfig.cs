@@ -9,8 +9,6 @@ namespace Ostium.BeforeIDie.API.Configurations
         public AutoMapperConfig()
         {
             CreateMap<SonhadorEntity, SonhadorDto>().ReverseMap();
-            CreateMap<StatusSonhoEntity, StatusSonhosDto>().ReverseMap();
-            CreateMap<VisibilidadeSonhoEntity, VisibilidadeSonhoDto>().ReverseMap();
             CreateMap<SonhoEntity, SonhoDto>().ReverseMap();
         }
     }

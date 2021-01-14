@@ -59,7 +59,7 @@ namespace Ostium.BeforeIDie.API.Controllers
         {
             var entities = await this._sonhoRepository.Get();
 
-            entities = entities.Where(x => x.IdVisibilidade.Equals(Id)).ToList();
+            entities = entities.Where(x => x.Visibilidade.Equals(Id)).ToList();
 
             var map = this._mapper.Map<List<SonhoDto>>(entities);
 
@@ -71,7 +71,7 @@ namespace Ostium.BeforeIDie.API.Controllers
         {
             var entities = await this._sonhoRepository.Get();
 
-            entities = entities.Where(x => x.IdStatus.Equals(Id)).ToList();
+            entities = entities.Where(x => x.Status.Equals(Id.ToUpper())).ToList();
 
             var map = this._mapper.Map<List<SonhoDto>>(entities);
 
