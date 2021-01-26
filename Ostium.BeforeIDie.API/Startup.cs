@@ -24,6 +24,16 @@ namespace Ostium.BeforeIDie.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddCors();
+
+            //services.AddCors(c =>
+            //{
+            //    c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:4200"));
+            //    c.AddPolicy("AllowOrigin", options => options.WithOrigins("http://26.27.214.133"));
+            //    c.AddPolicy("AllowOrigin", options => options.WithOrigins("http://DESKTOP-RDTVBO4"));
+            //});
+
             services.Configure<DatabaseSettings>(
                         Configuration.GetSection(nameof(DatabaseSettings))
                 );
@@ -57,12 +67,21 @@ namespace Ostium.BeforeIDie.API
             app.UseRouting();
 
             app.UseCors(x => x
-             .AllowAnyMethod()
-             .AllowAnyHeader()
-             .SetIsOriginAllowed(origin => true) // allow any origin
-             .AllowCredentials()); // allow credentials
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials());
+
+            app.UseCors("AllowOrigin");
 
             app.UseAuthorization();
+
+            //app.UseCors(options => options.WithOrigins("https://localhost:4200"));
+
+            //app.UseCors(options => options.WithOrigins("http://26.27.214.133"));
+
+            //app.UseCors(options => options.WithOrigins("http://DESKTOP-RDTVBO4"));
+
 
             app.UseEndpoints(endpoints =>
             {

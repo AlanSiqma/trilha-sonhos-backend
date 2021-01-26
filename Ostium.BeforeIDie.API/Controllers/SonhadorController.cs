@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Ostium.BeforeIDie.API.Model.Contracts.Respositories;
 using Ostium.BeforeIDie.API.Model.Dto;
