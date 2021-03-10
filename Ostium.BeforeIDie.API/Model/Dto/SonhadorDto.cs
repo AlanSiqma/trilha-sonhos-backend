@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ostium.BeforeIDie.API.Model.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,5 +14,11 @@ namespace Ostium.BeforeIDie.API.Model.Dto
         public string Email { get; set; }
 
         public string Senha { get; set; }
+
+        internal SonhadorDto EncryptSenha()
+        {
+            this.Senha = this.Senha.Encrypt();
+            return this;
+        }
     }
 }

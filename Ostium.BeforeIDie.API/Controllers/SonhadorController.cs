@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Ostium.BeforeIDie.API.Model.Contracts.Respositories;
 using Ostium.BeforeIDie.API.Model.Dto;
 using Ostium.BeforeIDie.API.Model.Entities;
+using Ostium.BeforeIDie.API.Model.Extensions;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -30,6 +31,21 @@ namespace Ostium.BeforeIDie.API.Controllers
            
             return Ok(new SonhadoresDto().AddSonhadores(map));
         }
+        [HttpGet("atualizar")]
+        public async Task<ActionResult<SonhadoresDto>> Atualizar()
+        {
+            var entities = await this._sonhadorRepository.Get();
+
+            foreach(var item in entities)
+            {
+                item.Senha = item.Senha.Encrypt();
+                await this._sonhadorRepository.Update(item.Id, item);
+            } 
+            
+            var map = this._mapper.Map<List<SonhadorDto>>(entities);
+
+            return Ok(new SonhadoresDto().AddSonhadores(map));
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<SonhadorDto>> Get(string id)
@@ -45,10 +61,9 @@ namespace Ostium.BeforeIDie.API.Controllers
         [HttpPost("entrar")]
         public async Task<ActionResult> Entrar(LoginDto dto)
         {
-            //TODO: implementar autenticacao
             SonhadorEntity usuario = await this._sonhadorRepository.Get( x =>
-                                                              x.Email == dto.Email &&
-                                                              x.Senha == dto.Password );
+                                                              x.Email.Equals(dto.Email) &&
+                                                              x.Senha.Equals(dto.Password.Encrypt()));
 
             if(usuario != null) usuario.Senha = string.Empty;
 
@@ -58,7 +73,7 @@ namespace Ostium.BeforeIDie.API.Controllers
         [HttpPost("nova-conta")]
         public async Task<ActionResult> Registrar(SonhadorDto dto)
         {
-            var map = this._mapper.Map<SonhadorEntity>(dto);
+            var map = this._mapper.Map<SonhadorEntity>(dto.EncryptSenha());
 
             await this._sonhadorRepository.Create(map);
 
@@ -70,6 +85,7 @@ namespace Ostium.BeforeIDie.API.Controllers
         {
             var map = this._mapper.Map<SonhadorEntity>(dto);
 
+            //TODO: não deixar alterar a senha por aqui
             await this._sonhadorRepository.Update(map.Id,map);
 
             return Ok(dto);
