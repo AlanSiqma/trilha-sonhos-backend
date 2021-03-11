@@ -29,10 +29,10 @@ namespace Ostium.BeforeIDie.API.Data.Repositories.Base
             return list.ToList();
         }
 
-        public async Task<TEntity> Get( Expression<Func<TEntity, bool>> predicate )
+        public async Task<List<TEntity>> Get( Expression<Func<TEntity, bool>> predicate )
         {
             var entity = await this._collections.FindAsync<TEntity>(predicate);
-            return entity.FirstOrDefault();
+            return entity.ToList();
         }
 
         public async Task<TEntity> Get(string id)

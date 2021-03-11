@@ -1,13 +1,21 @@
-﻿using Ostium.BeforeIDie.API.Model.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Ostium.BeforeIDie.API.Model.Entities;
+using Ostium.BeforeIDie.API.Model.Extensions;
 
 namespace Ostium.BeforeIDie.API.Model.Dto
 {
     public class SonhadorDto
     {
+        public SonhadorDto()
+        {
+
+        }
+        public SonhadorDto(SonhadorEntity entity)
+        {
+            this.Id = entity.Id;
+            this.Nome = entity.Nome;
+            this.Email = entity.Email;
+        }
+
         public string Id { get; set; }
         public string Nome { get; set; }
 

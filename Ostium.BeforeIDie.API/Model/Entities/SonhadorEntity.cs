@@ -1,7 +1,7 @@
 
 using System;
 using System.Collections.Generic;
-
+using Ostium.BeforeIDie.API.Model.Dto;
 using Ostium.BeforeIDie.API.Model.Entities.Base;
 
 namespace Ostium.BeforeIDie.API.Model.Entities
@@ -20,5 +20,11 @@ namespace Ostium.BeforeIDie.API.Model.Entities
 
         public IEnumerable<SonhoEntity> ListaSonhos { get; set; }
 
+        internal SonhadorEntity AlterarDados(SonhadorDto dto)
+        {
+            this.Nome = dto.Nome;
+            this.Email = dto.Email;
+            return this;
+        }
     }
 }

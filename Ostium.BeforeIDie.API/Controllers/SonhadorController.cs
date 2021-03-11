@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Ostium.BeforeIDie.API.Model.Contracts.Respositories;
 using Ostium.BeforeIDie.API.Model.Dto;
 using Ostium.BeforeIDie.API.Model.Entities;
 using Ostium.BeforeIDie.API.Model.Extensions;
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Ostium.BeforeIDie.API.Controllers
@@ -25,25 +24,8 @@ namespace Ostium.BeforeIDie.API.Controllers
         [HttpGet]
         public async Task<ActionResult<SonhadoresDto>> Get()
         {
-            var entities = await this._sonhadorRepository.Get();
+            var map = (await this._sonhadorRepository.Get()).Select(x => new SonhadorDto(x)).ToList();           
            
-            var map = this._mapper.Map<List<SonhadorDto>>(entities);
-           
-            return Ok(new SonhadoresDto().AddSonhadores(map));
-        }
-        [HttpGet("atualizar")]
-        public async Task<ActionResult<SonhadoresDto>> Atualizar()
-        {
-            var entities = await this._sonhadorRepository.Get();
-
-            foreach(var item in entities)
-            {
-                item.Senha = item.Senha.Encrypt();
-                await this._sonhadorRepository.Update(item.Id, item);
-            } 
-            
-            var map = this._mapper.Map<List<SonhadorDto>>(entities);
-
             return Ok(new SonhadoresDto().AddSonhadores(map));
         }
 
@@ -51,9 +33,11 @@ namespace Ostium.BeforeIDie.API.Controllers
         public async Task<ActionResult<SonhadorDto>> Get(string id)
         {
             var entity = await this._sonhadorRepository.Get(id);
+
             var map = this._mapper.Map<SonhadorDto>(entity);
             
-            if ( map != null ) map.Senha = string.Empty;
+            if ( map != null ) 
+                map.Senha = string.Empty;
 
             return Ok(map);
         }
@@ -61,11 +45,12 @@ namespace Ostium.BeforeIDie.API.Controllers
         [HttpPost("entrar")]
         public async Task<ActionResult> Entrar(LoginDto dto)
         {
-            SonhadorEntity usuario = await this._sonhadorRepository.Get( x =>
+            SonhadorEntity usuario = (await this._sonhadorRepository.Get( x =>
                                                               x.Email.Equals(dto.Email) &&
-                                                              x.Senha.Equals(dto.Password.Encrypt()));
+                                                              x.Senha.Equals(dto.Password.Encrypt()))).FirstOrDefault();
 
-            if(usuario != null) usuario.Senha = string.Empty;
+            if(usuario != null) 
+                usuario.Senha = string.Empty;
 
             return Ok(usuario);
         }
@@ -73,6 +58,9 @@ namespace Ostium.BeforeIDie.API.Controllers
         [HttpPost("nova-conta")]
         public async Task<ActionResult> Registrar(SonhadorDto dto)
         {
+            if (string.IsNullOrEmpty(dto.Email) || string.IsNullOrEmpty(dto.Senha) || string.IsNullOrEmpty(dto.Nome))
+                return BadRequest();
+
             var map = this._mapper.Map<SonhadorEntity>(dto.EncryptSenha());
 
             await this._sonhadorRepository.Create(map);
@@ -83,10 +71,9 @@ namespace Ostium.BeforeIDie.API.Controllers
         [HttpPut("alterar-conta")]
         public async Task<ActionResult> Alterar(SonhadorDto dto)
         {
-            var map = this._mapper.Map<SonhadorEntity>(dto);
+            var entity  = (await this._sonhadorRepository.Get(dto.Id));
 
-            //TODO: não deixar alterar a senha por aqui
-            await this._sonhadorRepository.Update(map.Id,map);
+            await this._sonhadorRepository.Update(entity.Id, entity.AlterarDados(dto));
 
             return Ok(dto);
         }
