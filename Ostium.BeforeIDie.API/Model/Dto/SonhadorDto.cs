@@ -14,6 +14,7 @@ namespace Ostium.BeforeIDie.API.Model.Dto
             this.Id = entity.Id;
             this.Nome = entity.Nome;
             this.Email = entity.Email;
+            this.TemaDoUsuario = entity.TemaDoUsuario;
         }
 
         public string Id { get; set; }
@@ -22,6 +23,8 @@ namespace Ostium.BeforeIDie.API.Model.Dto
         public string Email { get; set; }
 
         public string Senha { get; set; }
+
+        public string TemaDoUsuario { get; set; }
 
         internal SonhadorDto EncryptSenha()
         {

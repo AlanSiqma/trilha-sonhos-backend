@@ -18,12 +18,15 @@ namespace Ostium.BeforeIDie.API.Model.Entities
 
         public string Senha { get; set; }
 
+        public string TemaDoUsuario { get; set; }
+
         public IEnumerable<SonhoEntity> ListaSonhos { get; set; }
 
         internal SonhadorEntity AlterarDados(SonhadorDto dto)
         {
             this.Nome = dto.Nome;
             this.Email = dto.Email;
+            this.TemaDoUsuario = dto.TemaDoUsuario;
             return this;
         }
     }

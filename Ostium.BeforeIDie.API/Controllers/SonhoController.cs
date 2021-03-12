@@ -84,7 +84,15 @@ namespace Ostium.BeforeIDie.API.Controllers
         
             var map = this._mapper.Map<SonhoEntity>(dto);
 
-            await this._sonhoRepository.Create(map);
+            var result = new SonhosDto();
+
+            var entit  = await this._sonhoRepository.Create(map);
+
+            var sonhos = (await this._sonhoRepository.Get()).Select( x => new SonhoDto(x));
+
+            result.AddSonhos(sonhos.ToList());
+
+            result.SetSonhoDestaque(entit.Id);
 
             return Ok(dto);
         }
