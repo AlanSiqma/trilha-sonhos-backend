@@ -94,7 +94,7 @@ namespace Ostium.BeforeIDie.API.Controllers
 
             result.SetSonhoDestaque(entit.Id);
 
-            return Ok(dto);
+            return Ok(result);
         }
         
         [HttpPut("alterar-sonho")]
