@@ -1,5 +1,6 @@
 
 using Ostium.BeforeIDie.API.Model.Entities.Base;
+using System.Collections.Generic;
 
 namespace Ostium.BeforeIDie.API.Model.Entities
 {
@@ -7,6 +8,10 @@ namespace Ostium.BeforeIDie.API.Model.Entities
         public override string ToString()
         {
             return "SonhoEntity";
+        }
+        public SonhoEntity()
+        {
+            this.Trilhas = new List<TrilhaEntity>();
         }
         public string Sonho { get; set; }
 
@@ -20,7 +25,7 @@ namespace Ostium.BeforeIDie.API.Model.Entities
 
         public SonhadorEntity Sonhador {get;set;}
 
-    /*EF*/
+        public List<TrilhaEntity> Trilhas { get; set; }
     }
 }
 

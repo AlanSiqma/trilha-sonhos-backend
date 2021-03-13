@@ -10,6 +10,8 @@ namespace Ostium.BeforeIDie.API.Configurations
         {
             CreateMap<SonhadorEntity, SonhadorDto>().ReverseMap();
             CreateMap<SonhoEntity, SonhoDto>().ReverseMap();
+            CreateMap<ModeloTrilhaEntity, ModeloTrilhaDto>().ReverseMap();
+            CreateMap<TrilhaEntity, TrilhaDto>().ReverseMap();
         }
     }
 }

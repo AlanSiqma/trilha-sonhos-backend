@@ -33,9 +33,9 @@ namespace Ostium.BeforeIDie.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<SonhoDto>> Get(string Id)
+        public async Task<ActionResult<SonhoDto>> Get(string id)
         {
-            var entity = await this._sonhoRepository.Get();
+            var entity = await this._sonhoRepository.Get(id);
 
             var map = this._mapper.Map<SonhoDto>(entity);
 
