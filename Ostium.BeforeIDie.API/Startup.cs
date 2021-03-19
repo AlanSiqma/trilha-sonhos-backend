@@ -21,18 +21,10 @@ namespace Ostium.BeforeIDie.API
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
             services.AddCors();
-
-            //services.AddCors(c =>
-            //{
-            //    c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:4200"));
-            //    c.AddPolicy("AllowOrigin", options => options.WithOrigins("http://26.27.214.133"));
-            //    c.AddPolicy("AllowOrigin", options => options.WithOrigins("http://DESKTOP-RDTVBO4"));
-            //});
 
             services.Configure<DatabaseSettings>(
                         Configuration.GetSection(nameof(DatabaseSettings))
@@ -52,7 +44,6 @@ namespace Ostium.BeforeIDie.API
             services.AddInjection();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -61,8 +52,6 @@ namespace Ostium.BeforeIDie.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ostium.BeforeIDie.API v1"));
             }
-
-            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
@@ -75,13 +64,6 @@ namespace Ostium.BeforeIDie.API
             app.UseCors("AllowOrigin");
 
             app.UseAuthorization();
-
-            //app.UseCors(options => options.WithOrigins("https://localhost:4200"));
-
-            //app.UseCors(options => options.WithOrigins("http://26.27.214.133"));
-
-            //app.UseCors(options => options.WithOrigins("http://DESKTOP-RDTVBO4"));
-
 
             app.UseEndpoints(endpoints =>
             {

@@ -40,7 +40,7 @@ namespace Ostium.BeforeIDie.API.Controllers
 
             return Ok(map);
         }
-       
+
         [HttpGet("trilhas-modelos-usuario/{id}")]
         public async Task<ActionResult<List<ModeloTrilhaDto>>> TrilhasModeloUsuario(string id)
         {
@@ -51,34 +51,35 @@ namespace Ostium.BeforeIDie.API.Controllers
             var map = this._mapper.Map<List<ModeloTrilhaDto>>(entities);
 
             return Ok(map);
-        }   
- 
+        }
+
         [HttpPost("nova-trilha")]
-        public async Task<ActionResult> Post(ModeloTrilhaDto dto) {
-        
+        public async Task<ActionResult> Post(ModeloTrilhaDto dto)
+        {
+
             var map = this._mapper.Map<ModeloTrilhaEntity>(dto);
-           
-            var entity  = await this._modeloTrilhaRepository.Create(map);
-            
+
+            await this._modeloTrilhaRepository.Create(map);
+
             return Ok(dto);
         }
-        
+
         [HttpPut("alterar-modelo-trilha")]
         public async Task<ActionResult> Put(ModeloTrilhaDto dto)
         {
             var map = this._mapper.Map<ModeloTrilhaEntity>(dto);
 
-            await this._modeloTrilhaRepository.Update(map.Id,map);
+            await this._modeloTrilhaRepository.Update(map.Id, map);
 
             return Ok(dto);
         }
-        
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(string id)
         {
             await this._modeloTrilhaRepository.Remove(id);
 
-            return Ok( new {msg = "removido"});
+            return Ok(new { msg = "removido" });
         }
     }
 }

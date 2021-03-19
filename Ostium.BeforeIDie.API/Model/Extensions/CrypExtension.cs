@@ -1,6 +1,4 @@
-﻿using Ostium.BeforeIDie.API.Model.Settings;
-using Ostium.BeforeIDie.API.Model.ValueObjects;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -25,20 +23,6 @@ namespace Ostium.BeforeIDie.API.Model.Extensions
             }
 
             return Retorno.ToString();
-        }
-
-        public static string Encrypt(this string Texto, string chave, CryptValueObject provider)
-        {
-            CryptographySettings crip = new CryptographySettings(provider);
-            crip.Key = chave;
-            return crip.Encrypt(Texto);
-        }
-
-        public static string Decrypt(this string Texto, string chave, CryptValueObject provider)
-        {
-            CryptographySettings crip = new CryptographySettings(provider);
-            crip.Key = chave;
-            return crip.Decrypt(Texto);
         }
     }
 }
