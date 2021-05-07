@@ -9,6 +9,6 @@ namespace Ostium.BeforeIDie.API.Model.Entities
         }
         public string Descricao { get; set; }
 
-        public bool PassosTrilha { get; set; }
+        public bool Valor { get; set; }
     }
 }

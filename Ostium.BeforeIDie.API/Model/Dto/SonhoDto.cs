@@ -17,7 +17,7 @@ namespace Ostium.BeforeIDie.API.Model.Dto
         }
         public SonhoDto()
         {
-            this.Trilha = new List<TrilhaDto>();
+            this.Trilhas = new List<TrilhaDto>();
         }
         public string Id { get; set; }
 
@@ -31,7 +31,7 @@ namespace Ostium.BeforeIDie.API.Model.Dto
 
         public string IdSonhador { get; set; }
 
-        public List<TrilhaDto> Trilha { get; set; }
+        public List<TrilhaDto> Trilhas { get; set; }
 
     }
 }
