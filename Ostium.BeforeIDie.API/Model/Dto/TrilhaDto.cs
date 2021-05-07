@@ -6,10 +6,9 @@ namespace Ostium.BeforeIDie.API.Model.Entities
     public class TrilhaDto{
         public TrilhaDto()
         {
-            this.PassosTrilha = new List<string>();
         }
-        public string NomeTrilha { get; set; }
+        public string DescricaoDescricao { get; set; }
 
-        public List<string> PassosTrilha { get; set; }
+        public bool PassosTrilha { get; set; }
     }
 }
