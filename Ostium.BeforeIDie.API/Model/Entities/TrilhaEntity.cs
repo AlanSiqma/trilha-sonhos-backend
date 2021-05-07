@@ -7,7 +7,7 @@ namespace Ostium.BeforeIDie.API.Model.Entities
         public TrilhaEntity()
         {
         }
-        public string DescricaoDescricao { get; set; }
+        public string Descricao { get; set; }
 
         public bool PassosTrilha { get; set; }
     }
