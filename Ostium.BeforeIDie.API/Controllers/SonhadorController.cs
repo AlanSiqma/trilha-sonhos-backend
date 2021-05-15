@@ -68,6 +68,14 @@ namespace Ostium.BeforeIDie.API.Controllers
             return Ok(dto);
         }
 
+        [HttpPut("solicitar-alteracao-senha")]
+        public async Task<ActionResult> SolicitarAlteracaoSenha(AlteracaoSenhaDto dto)
+        {
+
+            return Ok();
+        }
+
+
         [HttpPut("alterar-conta")]
         public async Task<ActionResult> Alterar(SonhadorDto dto)
         {
