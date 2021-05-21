@@ -76,6 +76,21 @@ namespace Ostium.BeforeIDie.API.Controllers
         }
 
 
+        [HttpPut("validar-token")]
+        public async Task<ActionResult> ValidarToken(ValidarTokenDto dto)
+        {
+
+            return Ok(new SolicitarAlteraracaoSenhaDto() { Email="alan.siqma@gmail.com"});
+        }
+
+        [HttpPut("alterar-senha")]
+        public async Task<ActionResult> AlterarSenha(SolicitarAlteraracaoSenhaDto dto)
+        {
+
+            return Ok();
+        }
+
+
         [HttpPut("alterar-conta")]
         public async Task<ActionResult> Alterar(SonhadorDto dto)
         {
