@@ -5,8 +5,11 @@ using Ostium.BeforeIDie.API.Model.Contracts.Respositories;
 using Ostium.BeforeIDie.API.Model.Dto;
 using Ostium.BeforeIDie.API.Model.Entities;
 using Ostium.BeforeIDie.API.Model.Extensions;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ToolBoxDeveloper.TemplateEmail.Package.Contracts;
+using ToolBoxDeveloper.TemplateEmail.Package.Dto;
 
 namespace Ostium.BeforeIDie.API.Controllers
 {
@@ -16,12 +19,14 @@ namespace Ostium.BeforeIDie.API.Controllers
     {
         private readonly ISonhadorRepository _sonhadorRepository;
         private readonly ISolicitacaoResetRepository _solicitacaoResetRepository;
+        private readonly IEmailProxy _emailProxy;
         private readonly IMapper _mapper;
 
-        public SonhadorController(ISonhadorRepository sonhadorRepository, ISolicitacaoResetRepository solicitacaoResetRepository, IMapper mapper)
+        public SonhadorController(ISonhadorRepository sonhadorRepository, ISolicitacaoResetRepository solicitacaoResetRepository, IEmailProxy emailProxy, IMapper mapper)
         {
             this._sonhadorRepository = sonhadorRepository;
             this._solicitacaoResetRepository = solicitacaoResetRepository;
+            this._emailProxy = emailProxy;
             this._mapper = mapper;
         }
         [HttpGet]
@@ -82,21 +87,32 @@ namespace Ostium.BeforeIDie.API.Controllers
 
                     if (entities.Count > 0)
                     {
-                        var entity = entities.FirstOrDefault();
+                        var sonhador = entities.FirstOrDefault();
 
-                        var solicitacoes = await this._solicitacaoResetRepository.Get(x => x.Usuario.Equals(entity.Id) && x.Ativo);
-                        var solicitacao = new SolicitacaoResetEntity(entity.Id);
+                        var solicitacoes = await this._solicitacaoResetRepository.Get(x => x.Usuario.Equals(sonhador.Id) && x.Ativo);
+                        var solicitacao = new SolicitacaoResetEntity(sonhador.Id);
 
                         if (solicitacoes.Where(x => x.DataExpiracaAtiva).ToList().Count == 0)
                             await this._solicitacaoResetRepository.Create(solicitacao);
                         else
                             solicitacao = solicitacoes.FirstOrDefault();
 
-                        //Enviar Email().
+                       
 
-                        var url = "http://localhost:4200/reset-password/" + solicitacao.Id;
+                        Dictionary<string, string> payload = new Dictionary<string, string>();
+                        payload.Add("USUARIO", sonhador.Nome);
+                        payload.Add("URL", "http://localhost:4200/reset-password/" + solicitacao.Id);
 
-                        //Enviar Email().
+                        SendEmailDto dtoSendEmail = new SendEmailDto(
+                                                    sender: "trilhasonhos@gmail.com",
+                                                    destination: sonhador.Email,
+                                                    subject: "RESET DE SENHA",
+                                                    payload: payload,
+                                                    idTemplate: "60a901543b318194fd678b7c",
+                                                    user: "trilhasonhos@gmail.com");
+
+                        var teste = await this._emailProxy.SendEmailFromTemplate(dtoSendEmail);                       
+
                     }
                 }
                 return Ok();
