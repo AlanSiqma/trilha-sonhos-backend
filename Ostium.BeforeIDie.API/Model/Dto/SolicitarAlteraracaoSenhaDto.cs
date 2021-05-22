@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Ostium.BeforeIDie.API.Model.Dto
+﻿namespace Ostium.BeforeIDie.API.Model.Dto
 {
     public class SolicitarAlteraracaoSenhaDto
     {
@@ -12,5 +7,7 @@ namespace Ostium.BeforeIDie.API.Model.Dto
         public string Password { get; set; }
 
         public string ConfirmationPassword { get; set; }
+
+        public string Token { get; set; }
     }
 }

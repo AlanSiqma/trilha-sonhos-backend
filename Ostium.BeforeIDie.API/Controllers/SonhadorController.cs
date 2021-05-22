@@ -2,14 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Ostium.BeforeIDie.API.Model.Contracts.Repositories;
 using Ostium.BeforeIDie.API.Model.Contracts.Respositories;
+using Ostium.BeforeIDie.API.Model.Contracts.Services;
 using Ostium.BeforeIDie.API.Model.Dto;
 using Ostium.BeforeIDie.API.Model.Entities;
 using Ostium.BeforeIDie.API.Model.Extensions;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ToolBoxDeveloper.TemplateEmail.Package.Contracts;
-using ToolBoxDeveloper.TemplateEmail.Package.Dto;
 
 namespace Ostium.BeforeIDie.API.Controllers
 {
@@ -19,14 +17,17 @@ namespace Ostium.BeforeIDie.API.Controllers
     {
         private readonly ISonhadorRepository _sonhadorRepository;
         private readonly ISolicitacaoResetRepository _solicitacaoResetRepository;
-        private readonly IEmailProxy _emailProxy;
+        private readonly IEmailService _emailService;
         private readonly IMapper _mapper;
 
-        public SonhadorController(ISonhadorRepository sonhadorRepository, ISolicitacaoResetRepository solicitacaoResetRepository, IEmailProxy emailProxy, IMapper mapper)
+        public SonhadorController(ISonhadorRepository sonhadorRepository,
+                                  ISolicitacaoResetRepository solicitacaoResetRepository,
+                                  IEmailService emailService,
+                                  IMapper mapper)
         {
             this._sonhadorRepository = sonhadorRepository;
             this._solicitacaoResetRepository = solicitacaoResetRepository;
-            this._emailProxy = emailProxy;
+            this._emailService = emailService;
             this._mapper = mapper;
         }
         [HttpGet]
@@ -97,25 +98,13 @@ namespace Ostium.BeforeIDie.API.Controllers
                         else
                             solicitacao = solicitacoes.FirstOrDefault();
 
-                       
-
-                        Dictionary<string, string> payload = new Dictionary<string, string>();
-                        payload.Add("USUARIO", sonhador.Nome);
-                        payload.Add("URL", "http://localhost:4200/reset-password/" + solicitacao.Id);
-
-                        SendEmailDto dtoSendEmail = new SendEmailDto(
-                                                    sender: "trilhasonhos@gmail.com",
-                                                    destination: sonhador.Email,
-                                                    subject: "RESET DE SENHA",
-                                                    payload: payload,
-                                                    idTemplate: "60a901543b318194fd678b7c",
-                                                    user: "trilhasonhos@gmail.com");
-
-                        var teste = await this._emailProxy.SendEmailFromTemplate(dtoSendEmail);                       
-
+                        if (await this._emailService.SolicitarResetDeSenha(nome: sonhador.Nome, idSolicitacao: solicitacao.Id, email: sonhador.Email))
+                            return Ok();
+                        else
+                            BadRequest();
                     }
                 }
-                return Ok();
+                return BadRequest();
             }
             catch (System.Exception ex)
             {
@@ -129,30 +118,38 @@ namespace Ostium.BeforeIDie.API.Controllers
         public async Task<ActionResult> ValidarToken(ValidarTokenDto dto)
         {
             var result = new SolicitarAlteraracaoSenhaDto() { Email = "" };
-            var entity = await this._solicitacaoResetRepository.Get(dto.Token);
-            if (entity.Ativo && entity.DataExpiracaAtiva)
+            if (await this.TokenValido(dto.Token))
             {
-                var sonhador = await this._sonhadorRepository.Get(entity.Usuario);
-
-                entity.Desativar();
-
-                await this._solicitacaoResetRepository.Update(entity.Id, entity);
-
+                var solicitacaoEntity = await this._solicitacaoResetRepository.Get(dto.Token);                
+                var sonhador = await this._sonhadorRepository.Get(solicitacaoEntity.Usuario);
                 result = new SolicitarAlteraracaoSenhaDto() { Email = sonhador.Email };
             }
-
             return Ok(result);
+        }
 
+        private async Task<bool> TokenValido(string token)
+        {
+            var entity = await this._solicitacaoResetRepository.Get(token);
+
+            if (entity == null)
+                return false;
+
+            return entity.Ativo && entity.DataExpiracaAtiva;
         }
 
         [HttpPut("alterar-senha")]
         public async Task<ActionResult> AlterarSenha(SolicitarAlteraracaoSenhaDto dto)
         {
-            if (!string.IsNullOrEmpty(dto.Email) && dto.Password.Equals(dto.ConfirmationPassword))
+            if ((await this.TokenValido(dto.Token)) && !string.IsNullOrEmpty(dto.Email) && dto.Password.Equals(dto.ConfirmationPassword))
             {
                 var entities = await this._sonhadorRepository.Get(x => x.Email.Equals(dto.Email));
                 var entity = entities.FirstOrDefault();
                 await this._sonhadorRepository.Update(entity.Id, entity.AlterarSenha(dto.Password));
+
+                var solicitacaoEntity = await this._solicitacaoResetRepository.Get(dto.Token);
+                solicitacaoEntity.Desativar();
+                await this._solicitacaoResetRepository.Update(solicitacaoEntity.Id, solicitacaoEntity);
+
                 return Ok();
             }
             return BadRequest();

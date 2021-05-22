@@ -46,6 +46,11 @@ namespace Ostium.BeforeIDie.API
                sp.GetRequiredService<IOptions<EmailProxySetting>>().Value);
 
 
+            services.Configure<EmailTrilhaSettings>(
+                  Configuration.GetSection(nameof(EmailTrilhaSettings)));
+
+            services.AddSingleton<EmailTrilhaSettings>(sp =>
+               sp.GetRequiredService<IOptions<EmailTrilhaSettings>>().Value);
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
