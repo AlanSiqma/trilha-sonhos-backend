@@ -1,9 +1,9 @@
 # O QUE TRILHA SONHOS?
-Linguagem Ubíqua (ou Linguagem Onipresente) é um conceito central de DDD. Ela consiste de um conjunto de termos que devem ser plenamente entendidos tanto por especialistas no domínio (usuários do sistema) como por desenvolvedores (implementadores do sistema)
+O Mural dos Sonhos é uma aplicação que tem como objetivo ajudar as pessoas a realizar seus sonhos. Através da plataforma, os usuários podem cadastrar seus sonhos e acompanhar sua evolução, além de cadastrar uma trilha para chegar até o sonho desejado.
 
-# O PROJETO
+A aplicação oferece diversas ferramentas para ajudar os usuários a alcançarem seus objetivos, como sugestões de atividades e dicas práticas para lidar com os desafios ao longo do caminho. Além disso, os usuários podem se conectar com outros membros da comunidade para compartilhar experiências, trocar ideias e se motivarem mutuamente.
 
-Visa o gerenciamento da linguagem ubíqua das empresas, facilitando assim o entendimento da regra de negocio.
+O Mural dos Sonhos é uma plataforma inclusiva e acolhedora, que valoriza a autenticidade e a diversidade. Todos os usuários são bem-vindos, independentemente da idade, gênero, raça ou religião. A aplicação está sempre em evolução, buscando novas formas de ajudar os usuários a realizar seus sonhos e aprimorar a experiência de todos os membros da comunidade.
 
 Gerado em [.net](https://dotnet.microsoft.com/en-us/download/dotnet/3.1) versao 3.1
 
