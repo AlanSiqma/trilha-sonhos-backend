@@ -1,4 +1,4 @@
-# O QUE TRILHA SONHOS?
+# O QUE É TRILHA SONHOS?
 O Mural dos Sonhos é uma aplicação que tem como objetivo ajudar as pessoas a realizar seus sonhos. Através da plataforma, os usuários podem cadastrar seus sonhos e acompanhar sua evolução, além de cadastrar uma trilha para chegar até o sonho desejado.
 
 A aplicação oferece diversas ferramentas para ajudar os usuários a alcançarem seus objetivos, como sugestões de atividades e dicas práticas para lidar com os desafios ao longo do caminho. Além disso, os usuários podem se conectar com outros membros da comunidade para compartilhar experiências, trocar ideias e se motivarem mutuamente.
