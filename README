@@ -1,1 +1,49 @@
-TESTE 
+# O QUE TRILHA SONHOS?
+Linguagem Ubíqua (ou Linguagem Onipresente) é um conceito central de DDD. Ela consiste de um conjunto de termos que devem ser plenamente entendidos tanto por especialistas no domínio (usuários do sistema) como por desenvolvedores (implementadores do sistema)
+
+# O PROJETO
+
+Visa o gerenciamento da linguagem ubíqua das empresas, facilitando assim o entendimento da regra de negocio.
+
+Gerado em [.net](https://dotnet.microsoft.com/en-us/download/dotnet/3.1) versao 3.1
+
+Você pode acessar a aplicação pelo [link](https://www.trilhasonhos.com.br/)
+
+## FAÇA PARTE DA EQUIPE NO TRELLO
+
+https://trello.com/invite/b/kSX8ETYE/6420a6e8d004c02a0f400d2e18da7616/trilha-sonhos
+
+</br>
+
+### PEGUE UMA TAREFA NO TRELLO.
+
+- https://trello.com/b/kSX8ETYE/trilha-sonhos
+- Coloque no seu nome e mova para DOING.
+
+</br>
+
+##  GITHUB
+
+- FAÇA UM FORK DO REPOSITÓRIO: https://github.com/AlanSiqma/trilha-sonhos-backend
+- Crie uma branch baseada na branch original `develop`
+    (experimente: `git checkout develop && git checkout -b nomeDaSuaNovaBranch`)
+- Escreva seu código
+    **Nota:** Não esqueça de garantir que todos os testes unitários continuem sendo executados corretamente.
+- Crie sua PR apontando para a branch base `develop`
+- Aguarde/acompanhe o status do seu PR
+- Compartilhe/convide um amigo para contribuir
+
+</br>
+
+<h1 style="text-align: center;">---> MISSÃO CUMPRIDA ✈️ <---</h1>
+
+
+## RODANDO APLICAÇÃO LOCALMENTE
+
+## PRÉ REQUESITO
+Mongo DB
+
+### RODANDO MONGO VIA DOCKER:
+- Instale o [docker](https://docs.docker.com/engine/install/)
+- Abra o prompt de comando e digite: docker pull mongo 
+- Apos baixar a imagem via prompt de comando digite o comando: docker run --name mongodb -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=ubiqua -e MONGO_INITDB_ROOT_PASSWORD=e296cd9f mongo
