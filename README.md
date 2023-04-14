@@ -46,4 +46,6 @@ Mongo DB
 ### RODANDO MONGO VIA DOCKER:
 - Instale o [docker](https://docs.docker.com/engine/install/)
 - Abra o prompt de comando e digite: docker pull mongo 
-- Apos baixar a imagem via prompt de comando digite o comando: docker run --name mongodb -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=ubiqua -e MONGO_INITDB_ROOT_PASSWORD=e296cd9f mongo
+- Apos baixar a imagem via prompt de comando digite o comando: 
+
+    `docker run --name mongo_trilha_sonhos -d -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=trilha-sonhos -e MONGO_INITDB_ROOT_PASSWORD=e296cd9f mongo`
