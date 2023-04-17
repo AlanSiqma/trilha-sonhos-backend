@@ -1,22 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Ostium.BeforeIDie.API.Extentions;
+using System;
 
 namespace Ostium.BeforeIDie.API
 {
     public class Program
     {
-        protected Program()
-        {
-
-        }
         public static void Main(string[] args)
         {
+
+            var ASPNETCORE_ENVIRONMENT =
+                Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+            if (ASPNETCORE_ENVIRONMENT == null)
+                DotEnvExtention.Load();
+
             CreateHostBuilder(args).Build().Run();
         }
 
