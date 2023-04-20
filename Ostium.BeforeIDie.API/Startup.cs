@@ -3,13 +3,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Ostium.BeforeIDie.API.Configurations;
 using Ostium.BeforeIDie.API.Model.Contracts.Settings;
 using Ostium.BeforeIDie.API.Settings;
-using ToolBoxDeveloper.TemplateEmail.Package.Settings;
 
 namespace Ostium.BeforeIDie.API
 {
@@ -38,19 +36,7 @@ namespace Ostium.BeforeIDie.API
             services.AddSingleton<IDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 
-
-            services.Configure<EmailProxySetting>(
-                    Configuration.GetSection(nameof(EmailProxySetting)));
-
-            services.AddSingleton<EmailProxySetting>(sp =>
-               sp.GetRequiredService<IOptions<EmailProxySetting>>().Value);
-
-
-            services.Configure<EmailTrilhaSettings>(
-                  Configuration.GetSection(nameof(EmailTrilhaSettings)));
-
-            services.AddSingleton<EmailTrilhaSettings>(sp =>
-               sp.GetRequiredService<IOptions<EmailTrilhaSettings>>().Value);
+            services.Configure<AuthMessageSenderOptions>(Configuration.GetSection(nameof(AuthMessageSenderOptions)));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
