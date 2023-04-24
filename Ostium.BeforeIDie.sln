@@ -12,6 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Domain", "02-Domain", "{4707C10B-9E3A-4ED7-9948-5B4E104B5FA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ostium.BeforeIDie.Domain", "Ostium.BeforeIDie.Domain\Ostium.BeforeIDie.Domain.csproj", "{3C5764F9-A2BF-48EB-8094-8C19B80E3B33}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,12 +26,17 @@ Global
 		{4981896E-9DE7-4121-9D82-0908BA41334B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4981896E-9DE7-4121-9D82-0908BA41334B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4981896E-9DE7-4121-9D82-0908BA41334B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C5764F9-A2BF-48EB-8094-8C19B80E3B33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C5764F9-A2BF-48EB-8094-8C19B80E3B33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C5764F9-A2BF-48EB-8094-8C19B80E3B33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C5764F9-A2BF-48EB-8094-8C19B80E3B33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4981896E-9DE7-4121-9D82-0908BA41334B} = {6E9D95B2-36AB-43C0-832D-585651E3949C}
+		{3C5764F9-A2BF-48EB-8094-8C19B80E3B33} = {4707C10B-9E3A-4ED7-9948-5B4E104B5FA7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CEB56D3E-23A5-4FFC-ABD1-792B77273DD9}
