@@ -56,7 +56,6 @@ namespace Ostium.BeforeIDie.API
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ostium.BeforeIDie.API v1"));
 
             app.UseRouting();
-
             app.UseCors(x => x
                 .AllowAnyMethod()
                 .AllowAnyHeader()
@@ -64,9 +63,7 @@ namespace Ostium.BeforeIDie.API
                 .AllowCredentials());
 
             app.UseCors("AllowOrigin");
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
