@@ -18,7 +18,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ostium.BeforeIDie.Domain", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Infra", "03-Infra", "{030C0B2A-4B40-4B78-BAD4-7766C5B9DC0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ostium.BeforeIDie.Infra", "Ostium.BeforeIDie.Infra\Ostium.BeforeIDie.Infra.csproj", "{006CB689-FA71-40D2-BB96-D087FAF97399}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ostium.BeforeIDie.Infra", "Ostium.BeforeIDie.Infra\Ostium.BeforeIDie.Infra.csproj", "{006CB689-FA71-40D2-BB96-D087FAF97399}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ostium.BeforeIDie.IoC", "Ostium.BeforeIDie.IoC\Ostium.BeforeIDie.IoC.csproj", "{33F4A131-11CE-44FA-BC74-CEF0D0B094AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{006CB689-FA71-40D2-BB96-D087FAF97399}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{006CB689-FA71-40D2-BB96-D087FAF97399}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{006CB689-FA71-40D2-BB96-D087FAF97399}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33F4A131-11CE-44FA-BC74-CEF0D0B094AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33F4A131-11CE-44FA-BC74-CEF0D0B094AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33F4A131-11CE-44FA-BC74-CEF0D0B094AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33F4A131-11CE-44FA-BC74-CEF0D0B094AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{4981896E-9DE7-4121-9D82-0908BA41334B} = {6E9D95B2-36AB-43C0-832D-585651E3949C}
 		{3C5764F9-A2BF-48EB-8094-8C19B80E3B33} = {4707C10B-9E3A-4ED7-9948-5B4E104B5FA7}
 		{006CB689-FA71-40D2-BB96-D087FAF97399} = {030C0B2A-4B40-4B78-BAD4-7766C5B9DC0C}
+		{33F4A131-11CE-44FA-BC74-CEF0D0B094AF} = {030C0B2A-4B40-4B78-BAD4-7766C5B9DC0C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CEB56D3E-23A5-4FFC-ABD1-792B77273DD9}
