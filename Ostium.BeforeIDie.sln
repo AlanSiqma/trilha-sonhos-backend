@@ -20,7 +20,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Infra", "03-Infra", "{03
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ostium.BeforeIDie.Infra", "Ostium.BeforeIDie.Infra\Ostium.BeforeIDie.Infra.csproj", "{006CB689-FA71-40D2-BB96-D087FAF97399}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ostium.BeforeIDie.IoC", "Ostium.BeforeIDie.IoC\Ostium.BeforeIDie.IoC.csproj", "{33F4A131-11CE-44FA-BC74-CEF0D0B094AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ostium.BeforeIDie.IoC", "Ostium.BeforeIDie.IoC\Ostium.BeforeIDie.IoC.csproj", "{33F4A131-11CE-44FA-BC74-CEF0D0B094AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-Services", "04-Services", "{956C8AC0-F116-4D87-9773-E3230F71087B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ostium.BeforeIDie.Services", "Ostium.BeforeIDie.Services\Ostium.BeforeIDie.Services.csproj", "{E391DDF5-FD5F-46D2-9161-F82FE492480F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +48,10 @@ Global
 		{33F4A131-11CE-44FA-BC74-CEF0D0B094AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33F4A131-11CE-44FA-BC74-CEF0D0B094AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33F4A131-11CE-44FA-BC74-CEF0D0B094AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E391DDF5-FD5F-46D2-9161-F82FE492480F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E391DDF5-FD5F-46D2-9161-F82FE492480F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E391DDF5-FD5F-46D2-9161-F82FE492480F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E391DDF5-FD5F-46D2-9161-F82FE492480F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +61,7 @@ Global
 		{3C5764F9-A2BF-48EB-8094-8C19B80E3B33} = {4707C10B-9E3A-4ED7-9948-5B4E104B5FA7}
 		{006CB689-FA71-40D2-BB96-D087FAF97399} = {030C0B2A-4B40-4B78-BAD4-7766C5B9DC0C}
 		{33F4A131-11CE-44FA-BC74-CEF0D0B094AF} = {030C0B2A-4B40-4B78-BAD4-7766C5B9DC0C}
+		{E391DDF5-FD5F-46D2-9161-F82FE492480F} = {956C8AC0-F116-4D87-9773-E3230F71087B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CEB56D3E-23A5-4FFC-ABD1-792B77273DD9}
