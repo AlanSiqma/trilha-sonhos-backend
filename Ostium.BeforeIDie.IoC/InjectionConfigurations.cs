@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Ostium.BeforeIDie.API.Services;
 using Ostium.BeforeIDie.Domain.Contracts.Repositories;
 using Ostium.BeforeIDie.Domain.Contracts.Respositories;
+using Ostium.BeforeIDie.Domain.Contracts.Services;
 using Ostium.BeforeIDie.Domain.Model.Contracts.Repositories;
 using Ostium.BeforeIDie.Infra.Data.Repositories;
 
@@ -15,7 +17,7 @@ namespace Ostium.BeforeIDie.IoC
             services.AddScoped<IModeloTrilhaRepository, ModeloTrilhaRepository>();
             services.AddScoped<ISolicitacaoResetRepository, SolicitacaoResetRepository>();
         
-            //services.AddScoped<IEmailService, EmailSender>();
+            services.AddScoped<IEmailService, EmailSender>();
 
 
             return services;

@@ -20,7 +20,7 @@ namespace Ostium.BeforeIDie.Domain.Dto
             return this;
         }
 
-        internal void SetSonhoDestaque(string id)
+        public void SetSonhoDestaque(string id)
         {
             this.IdSonhoDestaque = id;
         }

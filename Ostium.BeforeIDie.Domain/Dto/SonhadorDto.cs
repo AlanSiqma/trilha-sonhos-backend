@@ -26,7 +26,7 @@ namespace Ostium.BeforeIDie.Domain.Dto
 
         public string TemaDoUsuario { get; set; }
 
-        internal SonhadorDto EncryptSenha()
+        public SonhadorDto EncryptSenha()
         {
             this.Senha = this.Senha.Encrypt();
             return this;

@@ -13,7 +13,7 @@ namespace Ostium.BeforeIDie.Domain.Dto
         }
         public IEnumerable<SonhadorDto> Sonhadores{ get; set; }
 
-        internal SonhadoresDto AddSonhadores(List<SonhadorDto> map)
+        public SonhadoresDto AddSonhadores(List<SonhadorDto> map)
         {
             this.Sonhadores = map;
             return this;

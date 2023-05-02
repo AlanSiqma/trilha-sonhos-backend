@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Ostium.BeforeIDie.Domain\Ostium.BeforeIDie.Domain.csproj" />
     <ProjectReference Include="..\Ostium.BeforeIDie.Infra\Ostium.BeforeIDie.Infra.csproj" />
+    <ProjectReference Include="..\Ostium.BeforeIDie.Services\Ostium.BeforeIDie.Services.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
