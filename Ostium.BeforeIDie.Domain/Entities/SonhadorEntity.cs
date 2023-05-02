@@ -1,9 +1,7 @@
-
-using System;
-using System.Collections.Generic;
 using Ostium.BeforeIDie.Domain.Dto;
 using Ostium.BeforeIDie.Domain.Entities.Base;
 using Ostium.BeforeIDie.Domain.Extensions;
+using System.Collections.Generic;
 
 namespace Ostium.BeforeIDie.Domain.Entities
 {
@@ -24,7 +22,7 @@ namespace Ostium.BeforeIDie.Domain.Entities
 
         public IEnumerable<SonhoEntity> ListaSonhos { get; set; }
 
-        internal SonhadorEntity AlterarDados(SonhadorDto dto)
+        public SonhadorEntity AlterarDados(SonhadorDto dto)
         {
             this.Nome = dto.Nome;
             this.Email = dto.Email;
@@ -32,7 +30,7 @@ namespace Ostium.BeforeIDie.Domain.Entities
             return this;
         }
 
-        internal SonhadorEntity AlterarSenha(string password)
+        public SonhadorEntity AlterarSenha(string password)
         {
             this.Senha = password.Encrypt();
             return this;

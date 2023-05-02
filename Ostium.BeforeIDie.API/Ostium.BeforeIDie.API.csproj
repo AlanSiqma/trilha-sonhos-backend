@@ -18,6 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ostium.BeforeIDie.Domain\Ostium.BeforeIDie.Domain.csproj" />
+    <ProjectReference Include="..\Ostium.BeforeIDie.IoC\Ostium.BeforeIDie.IoC.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="appsettings.Homologation.Development.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>

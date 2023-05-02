@@ -5,9 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
-using Ostium.BeforeIDie.API.Configurations;
-using Ostium.BeforeIDie.API.Model.Contracts.Settings;
-using Ostium.BeforeIDie.API.Settings;
+using Ostium.BeforeIDie.Domain.Contracts.Settings;
+using Ostium.BeforeIDie.Domain.Settings;
+using Ostium.BeforeIDie.IoC;
 
 namespace Ostium.BeforeIDie.API
 {
