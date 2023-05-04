@@ -26,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Services", "02-Services"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ostium.BeforeIDie.Services", "Ostium.BeforeIDie.Services\Ostium.BeforeIDie.Services.csproj", "{E391DDF5-FD5F-46D2-9161-F82FE492480F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05-Tests", "05-Tests", "{B8106A7D-AC92-43A6-AF88-CB3B67CEA452}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
