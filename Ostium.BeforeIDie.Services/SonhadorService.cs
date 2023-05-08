@@ -25,13 +25,25 @@ namespace Ostium.BeforeIDie.Services
             this._mapper = mapper;
         }
 
-        public async Task<SonhadoresDto> GetSonhadores()
+        public async Task<SonhadoresDto> Get()
         {
             var map = await this._sonhadorRepository.Get();
 
             var listSonhadorDto = map.Select(x => new SonhadorDto(x)).ToList();
 
             return new SonhadoresDto().AddSonhadores(listSonhadorDto);
+        }
+
+        public async Task<SonhadorDto> GetById()
+        {
+            var entity = await this._sonhadorRepository.Get(id);
+
+            var map = this._mapper.Map<SonhadorDto>(entity);
+
+            if (map != null)
+                map.Senha = string.Empty;
+
+            return map;
         }
     }
 }
