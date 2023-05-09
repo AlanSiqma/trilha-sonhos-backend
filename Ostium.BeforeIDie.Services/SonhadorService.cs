@@ -3,8 +3,10 @@ using Ostium.BeforeIDie.Domain.Contracts.Repositories;
 using Ostium.BeforeIDie.Domain.Contracts.Respositories;
 using Ostium.BeforeIDie.Domain.Contracts.Services;
 using Ostium.BeforeIDie.Domain.Dto;
+using Ostium.BeforeIDie.Domain.Entities;
 using System.Linq;
 using System.Threading.Tasks;
+using Ostium.BeforeIDie.Domain.Extensions;
 
 namespace Ostium.BeforeIDie.Services
 {
@@ -44,6 +46,18 @@ namespace Ostium.BeforeIDie.Services
                 map.Senha = string.Empty;
 
             return map;
+        }
+
+        public async Task<SonhadorEntity> Entrar(LoginDto dto)
+        {
+            SonhadorEntity usuario = (await this._sonhadorRepository.Get(x =>
+                                                             x.Email.Equals(dto.Email) &&
+                                                             x.Senha.Equals(dto.Password.Encrypt()))).FirstOrDefault();
+
+            if (usuario != null)
+                usuario.Senha = string.Empty;
+
+            return usuario;
         }
     }
 }
