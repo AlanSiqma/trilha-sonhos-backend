@@ -7,6 +7,7 @@ using Ostium.BeforeIDie.Domain.Entities;
 using System.Linq;
 using System.Threading.Tasks;
 using Ostium.BeforeIDie.Domain.Extensions;
+using System;
 
 namespace Ostium.BeforeIDie.Services
 {
@@ -58,6 +59,17 @@ namespace Ostium.BeforeIDie.Services
                 usuario.Senha = string.Empty;
 
             return usuario;
+        }
+        public async Task<SonhadorDto> Registrar(SonhadorDto dto)
+        {
+            if (string.IsNullOrEmpty(dto.Email) || string.IsNullOrEmpty(dto.Senha) || string.IsNullOrEmpty(dto.Nome))
+                throw new ArgumentException("Emil, Senha e nome são obrigatorios") ;
+
+            var map = this._mapper.Map<SonhadorEntity>(dto.EncryptSenha());
+
+            await this._sonhadorRepository.Create(map);
+
+            return dto;
         }
     }
 }
