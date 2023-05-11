@@ -63,13 +63,37 @@ namespace Ostium.BeforeIDie.Services
         public async Task<SonhadorDto> Registrar(SonhadorDto dto)
         {
             if (string.IsNullOrEmpty(dto.Email) || string.IsNullOrEmpty(dto.Senha) || string.IsNullOrEmpty(dto.Nome))
-                throw new ArgumentException("Emil, Senha e nome são obrigatorios") ;
+                throw new ArgumentException("Emil, Senha e nome são obrigatorios");
 
             var map = this._mapper.Map<SonhadorEntity>(dto.EncryptSenha());
 
             await this._sonhadorRepository.Create(map);
 
             return dto;
+        }
+
+        public async Task SolicitarAlteracaoSenha(AlteracaoSenhaDto dto)
+        {
+
+            if (!string.IsNullOrEmpty(dto.Email))
+            {
+                var entities = await this._sonhadorRepository.Get(x => x.Email.Equals(dto.Email));
+
+                if (entities.Count > 0)
+                {
+                    var sonhador = entities.FirstOrDefault();
+
+                    var solicitacoes = await this._solicitacaoResetRepository.Get(x => x.Usuario.Equals(sonhador.Id) && x.Ativo);
+                    var solicitacao = new SolicitacaoResetEntity(sonhador.Id);
+
+                    if (solicitacoes.Where(x => x.DataExpiracaAtiva).ToList().Count == 0)
+                        await this._solicitacaoResetRepository.Create(solicitacao);
+                    else
+                        solicitacao = solicitacoes.FirstOrDefault();
+
+                    await this._emailService.SolicitarResetDeSenha(nome: sonhador.Nome, idSolicitacao: solicitacao.Id, email: sonhador.Email);
+                }
+            }
         }
     }
 }
