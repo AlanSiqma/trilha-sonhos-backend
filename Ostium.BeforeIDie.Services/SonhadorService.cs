@@ -95,5 +95,25 @@ namespace Ostium.BeforeIDie.Services
                 }
             }
         }
+        public async Task<SolicitarAlteraracaoSenhaDto> ValidarToken(ValidarTokenDto dto)
+        {
+            var result = new SolicitarAlteraracaoSenhaDto() { Email = "" };
+            if (await this.TokenValido(dto.Token))
+            {
+                var solicitacaoEntity = await this._solicitacaoResetRepository.Get(dto.Token);
+                var sonhador = await this._sonhadorRepository.Get(solicitacaoEntity.Usuario);
+                result = new SolicitarAlteraracaoSenhaDto() { Email = sonhador.Email };
+            }
+            return result;
+        }
+        private async Task<bool> TokenValido(string token)
+        {
+            var entity = await this._solicitacaoResetRepository.Get(token);
+
+            if (entity == null)
+                return false;
+
+            return entity.Ativo && entity.DataExpiracaAtiva;
+        }
     }
 }
