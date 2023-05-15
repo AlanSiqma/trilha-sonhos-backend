@@ -115,5 +115,18 @@ namespace Ostium.BeforeIDie.Services
 
             return entity.Ativo && entity.DataExpiracaAtiva;
         }
+        public async Task AlterarSenha(SolicitarAlteraracaoSenhaDto dto)
+        {
+            if ((await this.TokenValido(dto.Token)) && !string.IsNullOrEmpty(dto.Email) && dto.Password.Equals(dto.ConfirmationPassword))
+            {
+                var entities = await this._sonhadorRepository.Get(x => x.Email.Equals(dto.Email));
+                var entity = entities.FirstOrDefault();
+                await this._sonhadorRepository.Update(entity.Id, entity.AlterarSenha(dto.Password));
+
+                var solicitacaoEntity = await this._solicitacaoResetRepository.Get(dto.Token);
+                solicitacaoEntity.Desativar();
+                await this._solicitacaoResetRepository.Update(solicitacaoEntity.Id, solicitacaoEntity);
+            }
+        }
     }
 }
