@@ -8,7 +8,7 @@ using SendGrid.Helpers.Mail;
 using System;
 using System.Threading.Tasks;
 
-namespace Ostium.BeforeIDie.API.Services
+namespace Ostium.BeforeIDie.Services
 {
     public class EmailSender : IEmailService
     {
@@ -21,8 +21,7 @@ namespace Ostium.BeforeIDie.API.Services
             _logger = logger;
         }
 
-        public AuthMessageSenderOptions Options { get; } //Set with Secret Manager.
-
+        public AuthMessageSenderOptions Options { get; } 
         public async Task SendEmailAsync(string toEmail, string subject, string message)
         {
             if (string.IsNullOrEmpty(Options.SendGridKey))

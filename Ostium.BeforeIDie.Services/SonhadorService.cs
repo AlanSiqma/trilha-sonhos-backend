@@ -11,7 +11,7 @@ using System;
 
 namespace Ostium.BeforeIDie.Services
 {
-    internal class SonhadorService
+    public class SonhadorService : ISonhadorService
     {
         private readonly ISonhadorRepository _sonhadorRepository;
         private readonly ISolicitacaoResetRepository _solicitacaoResetRepository;
@@ -36,7 +36,6 @@ namespace Ostium.BeforeIDie.Services
 
             return new SonhadoresDto().AddSonhadores(listSonhadorDto);
         }
-
         public async Task<SonhadorDto> GetById(string id)
         {
             var entity = await this._sonhadorRepository.Get(id);
@@ -48,7 +47,6 @@ namespace Ostium.BeforeIDie.Services
 
             return map;
         }
-
         public async Task<SonhadorEntity> Entrar(LoginDto dto)
         {
             SonhadorEntity usuario = (await this._sonhadorRepository.Get(x =>
@@ -71,7 +69,6 @@ namespace Ostium.BeforeIDie.Services
 
             return dto;
         }
-
         public async Task SolicitarAlteracaoSenha(AlteracaoSenhaDto dto)
         {
 
@@ -127,6 +124,20 @@ namespace Ostium.BeforeIDie.Services
                 solicitacaoEntity.Desativar();
                 await this._solicitacaoResetRepository.Update(solicitacaoEntity.Id, solicitacaoEntity);
             }
+        }
+        public async Task<SonhadorDto> Alterar(SonhadorDto dto)
+        {
+            var entity = (await this._sonhadorRepository.Get(dto.Id));
+
+            await this._sonhadorRepository.Update(entity.Id, entity.AlterarDados(dto));
+
+            return dto;
+        }
+        public async Task<string> Delete(string id)
+        {
+            await this._sonhadorRepository.Remove(id);
+
+            return id;
         }
     }
 }
