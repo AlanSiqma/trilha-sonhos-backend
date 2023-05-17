@@ -19,12 +19,14 @@ namespace Ostium.BeforeIDie.API.Controllers
         private readonly ISolicitacaoResetRepository _solicitacaoResetRepository;
         private readonly IEmailService _emailService;
         private readonly IMapper _mapper;
-
-        public SonhadorController(ISonhadorRepository sonhadorRepository,
+        private readonly ISonhadorService _sonhadorService;
+        public SonhadorController(ISonhadorService sonhadorService,
+                                  ISonhadorRepository sonhadorRepository,
                                   ISolicitacaoResetRepository solicitacaoResetRepository,
                                   IEmailService emailService,
                                   IMapper mapper)
         {
+            this._sonhadorService = sonhadorService;
             this._sonhadorRepository = sonhadorRepository;
             this._solicitacaoResetRepository = solicitacaoResetRepository;
             this._emailService = emailService;
@@ -33,9 +35,7 @@ namespace Ostium.BeforeIDie.API.Controllers
         [HttpGet]
         public async Task<ActionResult<SonhadoresDto>> Get()
         {
-            var map = (await this._sonhadorRepository.Get()).Select(x => new SonhadorDto(x)).ToList();
-
-            return Ok(new SonhadoresDto().AddSonhadores(map));
+            return Ok(this._sonhadorService.Get());
         }
 
         [HttpGet("{id}")]
