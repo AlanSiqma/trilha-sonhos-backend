@@ -35,20 +35,13 @@ namespace Ostium.BeforeIDie.API.Controllers
         [HttpGet]
         public async Task<ActionResult<SonhadoresDto>> Get()
         {
-            return Ok(this._sonhadorService.Get());
+            return Ok(await this._sonhadorService.Get());
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<SonhadorDto>> Get(string id)
         {
-            var entity = await this._sonhadorRepository.Get(id);
-
-            var map = this._mapper.Map<SonhadorDto>(entity);
-
-            if (map != null)
-                map.Senha = string.Empty;
-
-            return Ok(map);
+            return Ok(await this._sonhadorService.GetById(id));
         }
 
         [HttpPost("entrar")]
