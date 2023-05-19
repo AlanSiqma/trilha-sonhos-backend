@@ -47,14 +47,7 @@ namespace Ostium.BeforeIDie.API.Controllers
         [HttpPost("entrar")]
         public async Task<ActionResult> Entrar(LoginDto dto)
         {
-            SonhadorEntity usuario = (await this._sonhadorRepository.Get(x =>
-                                                             x.Email.Equals(dto.Email) &&
-                                                             x.Senha.Equals(dto.Password.Encrypt()))).FirstOrDefault();
-
-            if (usuario != null)
-                usuario.Senha = string.Empty;
-
-            return Ok(usuario);
+            return Ok(await this._sonhadorService.Entrar(dto));
         }
 
         [HttpPost("nova-conta")]
