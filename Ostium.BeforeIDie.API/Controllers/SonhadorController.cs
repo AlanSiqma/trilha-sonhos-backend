@@ -53,14 +53,7 @@ namespace Ostium.BeforeIDie.API.Controllers
         [HttpPost("nova-conta")]
         public async Task<ActionResult> Registrar(SonhadorDto dto)
         {
-            if (string.IsNullOrEmpty(dto.Email) || string.IsNullOrEmpty(dto.Senha) || string.IsNullOrEmpty(dto.Nome))
-                return BadRequest();
-
-            var map = this._mapper.Map<SonhadorEntity>(dto.EncryptSenha());
-
-            await this._sonhadorRepository.Create(map);
-
-            return Ok(dto);
+            return Ok(await this._sonhadorService.Registrar(dto));
         }
 
         [HttpPut("solicitar-alteracao-senha")]
