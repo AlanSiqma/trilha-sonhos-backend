@@ -61,29 +61,8 @@ namespace Ostium.BeforeIDie.API.Controllers
         {
             try
             {
-                if (!string.IsNullOrEmpty(dto.Email))
-                {
-                    var entities = await this._sonhadorRepository.Get(x => x.Email.Equals(dto.Email));
-
-                    if (entities.Count > 0)
-                    {
-                        var sonhador = entities.FirstOrDefault();
-
-                        var solicitacoes = await this._solicitacaoResetRepository.Get(x => x.Usuario.Equals(sonhador.Id) && x.Ativo);
-                        var solicitacao = new SolicitacaoResetEntity(sonhador.Id);
-
-                        if (solicitacoes.Where(x => x.DataExpiracaAtiva).ToList().Count == 0)
-                            await this._solicitacaoResetRepository.Create(solicitacao);
-                        else
-                            solicitacao = solicitacoes.FirstOrDefault();
-
-                        if (await this._emailService.SolicitarResetDeSenha(nome: sonhador.Nome, idSolicitacao: solicitacao.Id, email: sonhador.Email))
-                            return Ok();
-                        else
-                            BadRequest();
-                    }
-                }
-                return BadRequest();
+                await this._sonhadorService.SolicitarAlteracaoSenha(dto);
+                return Ok();
             }
             catch (System.Exception ex)
             {
