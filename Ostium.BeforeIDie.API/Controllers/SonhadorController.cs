@@ -75,14 +75,7 @@ namespace Ostium.BeforeIDie.API.Controllers
         [HttpPut("validar-token")]
         public async Task<ActionResult> ValidarToken(ValidarTokenDto dto)
         {
-            var result = new SolicitarAlteraracaoSenhaDto() { Email = "" };
-            if (await this.TokenValido(dto.Token))
-            {
-                var solicitacaoEntity = await this._solicitacaoResetRepository.Get(dto.Token);                
-                var sonhador = await this._sonhadorRepository.Get(solicitacaoEntity.Usuario);
-                result = new SolicitarAlteraracaoSenhaDto() { Email = sonhador.Email };
-            }
-            return Ok(result);
+            return Ok(await this._sonhadorService.ValidarToken(dto));
         }
 
         private async Task<bool> TokenValido(string token)
