@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using Ostium.BeforeIDie.Domain.Contracts.Repositories;
 using Ostium.BeforeIDie.Domain.Contracts.Respositories;
 using Ostium.BeforeIDie.Domain.Contracts.Services;
@@ -78,20 +79,10 @@ namespace Ostium.BeforeIDie.API.Controllers
             return Ok(await this._sonhadorService.ValidarToken(dto));
         }
 
-        private async Task<bool> TokenValido(string token)
-        {
-            var entity = await this._solicitacaoResetRepository.Get(token);
-
-            if (entity == null)
-                return false;
-
-            return entity.Ativo && entity.DataExpiracaAtiva;
-        }
-
         [HttpPut("alterar-senha")]
         public async Task<ActionResult> AlterarSenha(SolicitarAlteraracaoSenhaDto dto)
         {
-            if ((await this.TokenValido(dto.Token)) && !string.IsNullOrEmpty(dto.Email) && dto.Password.Equals(dto.ConfirmationPassword))
+            if (( await this._sonhadorService.TokenValido(dto.Token)) && !string.IsNullOrEmpty(dto.Email) && dto.Password.Equals(dto.ConfirmationPassword))
             {
                 var entities = await this._sonhadorRepository.Get(x => x.Email.Equals(dto.Email));
                 var entity = entities.FirstOrDefault();
