@@ -14,6 +14,7 @@ namespace Ostium.BeforeIDie.Domain.Contracts.Services
         Task<SolicitarAlteraracaoSenhaDto> ValidarToken(ValidarTokenDto dto);
         Task AlterarSenha(SolicitarAlteraracaoSenhaDto dto);
         Task<SonhadorDto> Alterar(SonhadorDto dto);
+        Task<bool> TokenValido(string token);
         Task<string> Delete(string id);
     }
 }

@@ -103,7 +103,7 @@ namespace Ostium.BeforeIDie.Services
             }
             return result;
         }
-        private async Task<bool> TokenValido(string token)
+        public async Task<bool> TokenValido(string token)
         {
             var entity = await this._solicitacaoResetRepository.Get(token);
 
