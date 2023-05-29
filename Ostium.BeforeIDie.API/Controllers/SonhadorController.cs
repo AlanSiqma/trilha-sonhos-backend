@@ -1,13 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 using Ostium.BeforeIDie.Domain.Contracts.Repositories;
 using Ostium.BeforeIDie.Domain.Contracts.Respositories;
 using Ostium.BeforeIDie.Domain.Contracts.Services;
 using Ostium.BeforeIDie.Domain.Dto;
-using Ostium.BeforeIDie.Domain.Entities;
-using Ostium.BeforeIDie.Domain.Extensions;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Ostium.BeforeIDie.API.Controllers
@@ -16,22 +12,10 @@ namespace Ostium.BeforeIDie.API.Controllers
     [ApiController]
     public class SonhadorController : ControllerBase
     {
-        private readonly ISonhadorRepository _sonhadorRepository;
-        private readonly ISolicitacaoResetRepository _solicitacaoResetRepository;
-        private readonly IEmailService _emailService;
-        private readonly IMapper _mapper;
         private readonly ISonhadorService _sonhadorService;
-        public SonhadorController(ISonhadorService sonhadorService,
-                                  ISonhadorRepository sonhadorRepository,
-                                  ISolicitacaoResetRepository solicitacaoResetRepository,
-                                  IEmailService emailService,
-                                  IMapper mapper)
+        public SonhadorController(ISonhadorService sonhadorService)
         {
             this._sonhadorService = sonhadorService;
-            this._sonhadorRepository = sonhadorRepository;
-            this._solicitacaoResetRepository = solicitacaoResetRepository;
-            this._emailService = emailService;
-            this._mapper = mapper;
         }
         [HttpGet]
         public async Task<ActionResult<SonhadoresDto>> Get()
@@ -72,7 +56,6 @@ namespace Ostium.BeforeIDie.API.Controllers
             }
         }
 
-
         [HttpPut("validar-token")]
         public async Task<ActionResult> ValidarToken(ValidarTokenDto dto)
         {
@@ -82,39 +65,29 @@ namespace Ostium.BeforeIDie.API.Controllers
         [HttpPut("alterar-senha")]
         public async Task<ActionResult> AlterarSenha(SolicitarAlteraracaoSenhaDto dto)
         {
-            if (( await this._sonhadorService.TokenValido(dto.Token)) && !string.IsNullOrEmpty(dto.Email) && dto.Password.Equals(dto.ConfirmationPassword))
+            try
             {
-                var entities = await this._sonhadorRepository.Get(x => x.Email.Equals(dto.Email));
-                var entity = entities.FirstOrDefault();
-                await this._sonhadorRepository.Update(entity.Id, entity.AlterarSenha(dto.Password));
-
-                var solicitacaoEntity = await this._solicitacaoResetRepository.Get(dto.Token);
-                solicitacaoEntity.Desativar();
-                await this._solicitacaoResetRepository.Update(solicitacaoEntity.Id, solicitacaoEntity);
-
+                await this._sonhadorService.AlterarSenha(dto);
                 return Ok();
             }
-            return BadRequest();
+            catch
+            {
+                return BadRequest();
+            }
         }
-
 
         [HttpPut("alterar-conta")]
         public async Task<ActionResult> Alterar(SonhadorDto dto)
         {
-            var entity = (await this._sonhadorRepository.Get(dto.Id));
-
-            await this._sonhadorRepository.Update(entity.Id, entity.AlterarDados(dto));
-
+            await this._sonhadorService.Alterar(dto);
             return Ok(dto);
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(string id)
         {
-            await this._sonhadorRepository.Remove(id);
-
+            await this._sonhadorService.Delete(id);
             return Ok(id);
         }
-
     }
 }
