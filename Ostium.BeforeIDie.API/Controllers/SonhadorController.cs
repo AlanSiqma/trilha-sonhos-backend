@@ -1,7 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Ostium.BeforeIDie.Domain.Contracts.Repositories;
-using Ostium.BeforeIDie.Domain.Contracts.Respositories;
+﻿using Microsoft.AspNetCore.Mvc;
 using Ostium.BeforeIDie.Domain.Contracts.Services;
 using Ostium.BeforeIDie.Domain.Dto;
 using System.Threading.Tasks;
