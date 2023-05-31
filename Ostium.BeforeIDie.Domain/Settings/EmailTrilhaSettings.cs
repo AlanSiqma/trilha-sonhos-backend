@@ -1,5 +1,8 @@
-﻿namespace Ostium.BeforeIDie.Domain.Settings
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Ostium.BeforeIDie.Domain.Settings
 {
+    [ExcludeFromCodeCoverageAttribute]
     public class EmailTrilhaSettings
     {
         public string Sender { get; set; }

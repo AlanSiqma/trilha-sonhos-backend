@@ -5,12 +5,14 @@ using Ostium.BeforeIDie.Domain.Contracts.Settings;
 using Ostium.BeforeIDie.Domain.Entities.Base;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Ostium.BeforeIDie.Infra.Data.Repositories.Base
 {
+    [ExcludeFromCodeCoverageAttribute]
     public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : BaseEntity
     {
         private readonly IMongoCollection<TEntity> _collections;
