@@ -1,10 +1,11 @@
-using System;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Ostium.BeforeIDie.Domain.Entities.Base
 {
-     public abstract class BaseEntity{
+    [ExcludeFromCodeCoverageAttribute]
+    public abstract class BaseEntity{
 
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

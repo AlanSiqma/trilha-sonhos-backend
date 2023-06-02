@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Ostium.BeforeIDie.Domain.Dto
 {
+    [ExcludeFromCodeCoverageAttribute]
     public class LoginDto
     {
         [Required(ErrorMessage = "O campo {0} é obrigatório")]

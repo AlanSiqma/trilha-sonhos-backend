@@ -1,8 +1,10 @@
 ﻿
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Ostium.BeforeIDie.Domain.Dto
 {
+    [ExcludeFromCodeCoverageAttribute]
     public class ModeloTrilhaDto 
     {
         public ModeloTrilhaDto()
