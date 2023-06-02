@@ -1,8 +1,8 @@
-﻿using Ostium.BeforeIDie.Domain.Entities.Base;
-using System.Collections.Generic;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace Ostium.BeforeIDie.Domain.Entities
 {
+    [ExcludeFromCodeCoverageAttribute]
     public class TrilhaEntity    {
         public TrilhaEntity()
         {
