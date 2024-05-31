@@ -1,6 +1,7 @@
 ﻿using Ostium.BeforeIDie.Domain.Entities;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace Ostium.BeforeIDie.Domain.Dto
 {
@@ -16,6 +17,8 @@ namespace Ostium.BeforeIDie.Domain.Dto
             this.Status = entity.Status;
             this.Visibilidade = entity.Visibilidade;
             this.IdSonhador = entity.IdSonhador;
+            this.Trilhas = new List<TrilhaDto>();
+            this.Trilhas = entity.Trilhas.Select(x => new TrilhaDto(x)).ToList();
         }
         public SonhoDto()
         {

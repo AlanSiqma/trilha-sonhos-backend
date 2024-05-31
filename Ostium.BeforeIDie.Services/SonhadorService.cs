@@ -16,16 +16,14 @@ namespace Ostium.BeforeIDie.Services
         private readonly ISonhadorRepository _sonhadorRepository;
         private readonly ISolicitacaoResetRepository _solicitacaoResetRepository;
         private readonly IEmailService _emailService;
-        private readonly IMapper _mapper;
         public SonhadorService(ISonhadorRepository sonhadorRepository,
                                   ISolicitacaoResetRepository solicitacaoResetRepository,
-                                  IEmailService emailService,
-                                  IMapper mapper)
+                                  IEmailService emailService
+                                  )
         {
             this._sonhadorRepository = sonhadorRepository;
             this._solicitacaoResetRepository = solicitacaoResetRepository;
             this._emailService = emailService;
-            this._mapper = mapper;
         }
 
         public async Task<SonhadoresDto> Get()
@@ -40,7 +38,7 @@ namespace Ostium.BeforeIDie.Services
         {
             var entity = await this._sonhadorRepository.Get(id);
 
-            var map = this._mapper.Map<SonhadorDto>(entity);
+            var map = new SonhadorDto(entity);
 
             if (map != null)
                 map.Senha = string.Empty;
@@ -52,7 +50,6 @@ namespace Ostium.BeforeIDie.Services
             SonhadorEntity usuario = (await this._sonhadorRepository.Get(x =>
                                                              x.Email.Equals(dto.Email) &&
                                                              x.Senha.Equals(dto.Password.Encrypt()))).FirstOrDefault();
-
             if (usuario != null)
                 usuario.Senha = string.Empty;
 
@@ -63,9 +60,9 @@ namespace Ostium.BeforeIDie.Services
             if (string.IsNullOrEmpty(dto.Email) || string.IsNullOrEmpty(dto.Senha) || string.IsNullOrEmpty(dto.Nome))
                 throw new ArgumentException("Emil, Senha e nome são obrigatorios");
 
-            var map = this._mapper.Map<SonhadorEntity>(dto.EncryptSenha());
+            var entity = new SonhadorEntity(dto.EncryptSenha());
 
-            await this._sonhadorRepository.Create(map);
+            await this._sonhadorRepository.Create(entity);
 
             return dto;
         }

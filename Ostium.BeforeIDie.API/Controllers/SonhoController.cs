@@ -14,19 +14,16 @@ namespace Ostium.BeforeIDie.API.Controllers
     public class SonhoController : ControllerBase
     {
         private readonly ISonhoRepository _sonhoRepository;
-        private readonly IMapper _mapper;
-        public SonhoController(ISonhoRepository sonhadorRepository, IMapper mapper)
+        public SonhoController(ISonhoRepository sonhadorRepository)
         {
             this._sonhoRepository = sonhadorRepository;
-            this._mapper = mapper;
-
         }
         [HttpGet]
         public async Task<ActionResult<SonhosDto>> Get()
         {
             var entities = await this._sonhoRepository.Get();
 
-            var map = this._mapper.Map<List<SonhoDto>>(entities);
+            var map = entities.Select(x => new SonhoDto(x)).ToList();
 
             return Ok(new SonhosDto().AddSonhos(map));
         }
@@ -36,7 +33,7 @@ namespace Ostium.BeforeIDie.API.Controllers
         {
             var entity = await this._sonhoRepository.Get(id);
 
-            var map = this._mapper.Map<SonhoDto>(entity);
+            var map = new SonhoDto(entity);
 
             return Ok(map);
         }
@@ -48,9 +45,9 @@ namespace Ostium.BeforeIDie.API.Controllers
 
             entities = entities.Where(x => x.IdSonhador.Equals(id)).ToList();
 
-            var map = this._mapper.Map<List<SonhoDto>>(entities);
+            var map = entities.Select(x => new SonhoDto(x)).ToList();
 
-            return Ok(map);
+            return Ok(new SonhosDto().AddSonhos(map));
         }
 
         [HttpGet("sonhos-visibilidade/{id}")]
@@ -60,9 +57,9 @@ namespace Ostium.BeforeIDie.API.Controllers
 
             entities = entities.Where(x => x.Visibilidade.Equals(Id)).ToList();
 
-            var map = this._mapper.Map<List<SonhoDto>>(entities);
+            var map = entities.Select(x => new SonhoDto(x)).ToList();
 
-            return Ok(map);
+            return Ok(new SonhosDto().AddSonhos(map));
         }
 
         [HttpGet("sonhos-status/{id}")]
@@ -72,20 +69,20 @@ namespace Ostium.BeforeIDie.API.Controllers
 
             entities = entities.Where(x => x.Status.Equals(Id.ToUpper())).ToList();
 
-            var map = this._mapper.Map<List<SonhoDto>>(entities);
+            var map = entities.Select(x => new SonhoDto(x)).ToList();
 
-            return Ok(map);
+            return Ok(new SonhosDto().AddSonhos(map));
         }
 
         
         [HttpPost("novo-sonho")]
         public async Task<ActionResult> Post(SonhoDto dto) {
         
-            var map = this._mapper.Map<SonhoEntity>(dto);
+            var entity = new SonhoEntity(dto);
 
             var result = new SonhosDto();
 
-            var entit  = await this._sonhoRepository.Create(map);
+            var entit  = await this._sonhoRepository.Create(entity);
 
             var sonhos = (await this._sonhoRepository.Get()).Select( x => new SonhoDto(x));
 
@@ -99,7 +96,7 @@ namespace Ostium.BeforeIDie.API.Controllers
         [HttpPut("alterar-sonho")]
         public async Task<ActionResult> Put(SonhoDto dto)
         {
-            var map = this._mapper.Map<SonhoEntity>(dto);
+            var map = new SonhoEntity(dto);
 
             await this._sonhoRepository.Update(map.Id,map);
 

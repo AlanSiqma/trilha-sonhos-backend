@@ -7,6 +7,18 @@ namespace Ostium.BeforeIDie.Domain.Entities
 {
     public class SonhadorEntity : BaseEntity
     {
+        public SonhadorEntity()
+        {
+                
+        }
+
+        public SonhadorEntity(SonhadorDto sonhadorDto)
+        {
+            this.Nome = sonhadorDto.Nome;
+            this.Email = sonhadorDto.Email;
+            this.Senha = sonhadorDto.Senha;
+            this.TemaDoUsuario = sonhadorDto.TemaDoUsuario;
+        }
 
         public override string ToString()
         {

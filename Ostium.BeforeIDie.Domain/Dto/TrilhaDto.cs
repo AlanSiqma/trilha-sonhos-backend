@@ -1,5 +1,4 @@
-﻿using Ostium.BeforeIDie.Domain.Entities.Base;
-using System.Collections.Generic;
+﻿using Ostium.BeforeIDie.Domain.Entities;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Ostium.BeforeIDie.Domain.Dto
@@ -9,6 +8,13 @@ namespace Ostium.BeforeIDie.Domain.Dto
         public TrilhaDto()
         {
         }
+
+        public TrilhaDto(TrilhaEntity x)
+        {
+            Descricao = x.Descricao;
+            Valor = x.Valor;
+        }
+
         public string Descricao { get; set; }
 
         public bool Valor { get; set; }

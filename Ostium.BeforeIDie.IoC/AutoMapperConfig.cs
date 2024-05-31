@@ -10,10 +10,11 @@ namespace Ostium.BeforeIDie.IoC
     {
         public AutoMapperConfig()
         {
+            CreateMap<TrilhaEntity, TrilhaDto>().ReverseMap();
             CreateMap<SonhadorEntity, SonhadorDto>().ReverseMap();
             CreateMap<SonhoEntity, SonhoDto>().ReverseMap();
             CreateMap<ModeloTrilhaEntity, ModeloTrilhaDto>().ReverseMap();
-            CreateMap<TrilhaEntity, TrilhaDto>().ReverseMap();
+            
         }
     }
 }
