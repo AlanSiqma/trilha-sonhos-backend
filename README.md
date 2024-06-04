@@ -9,13 +9,6 @@ Gerado em [.net](https://dotnet.microsoft.com/en-us/download/dotnet/3.1) versao 
 
 Você pode acessar a aplicação pelo [link](https://www.trilhasonhos.com.br/)
 
-## ENTRE NO DISCORD
-https://discord.gg/q7wfgyqM
-
-## LÁ NO DISCORD
-- Se apresente. Nome, cidade, profissão, e principais habilidades.
-- Pergunte sobre as tarefas em aberto.
-- Troque uma ideia com o time técnico. Comente como planeja solucionar. Ouça os conselhos dos devs mais experientes. Esse alinhamento é super importante pra aumentar significativamente as chances do seu PULL REQUEST ser aprovado depois.
 
 ## FAÇA PARTE DA EQUIPE NO TRELLO
 
